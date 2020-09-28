@@ -1,0 +1,111 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 101,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "---------------------------Trial 1-------------------------------------\n",
+      "mass 0.4988 kg +/- 0.1 kg\n",
+      "Impulse -0.36 N/s +/- 0.5 N/s\n",
+      "Change in Momentum -0.36 N/s 0.6 N/s\n",
+      "---------------------------Trial 2-------------------------------------\n",
+      "mass 0.4988 kg +/- 0.1 kg\n",
+      "Impulse -0.55 N/s +/- 0.8 N/s\n",
+      "Change in Momentum -0.54 N/s 0.3 N/s\n",
+      "---------------------------Trial 3-------------------------------------\n",
+      "mass 0.4988 kg +/- 0.1 kg\n",
+      "Impulse -0.43 N/s +/- 1.3 N/s\n",
+      "Change in Momentum -0.75 N/s 0.3 N/s\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as nump #Import Python higher level mathematical library \n",
+    "\n",
+    "T1ip = -0.3586 #The LoggerPro Calculated Impulse of Trial 1\n",
+    "T1ipus = (-0.015, -0.217, -0.461, -0.663, -0.902, -1.171, -1.300, -1.410, -1.471, -1.508, -1.508, -1.453, -1.386, -1.251, -1.080, -0.859, -0.645, -0.480, -0.223) #The data points collected from the Force v. Time graph over the interval of impact for Trial 1\n",
+    "T1ipu = nump.std(T1ipus) #Calculation of uncertainty of the Impulse of Trial 1\n",
+    "\n",
+    "T2ip = -0.5533 #The LoggerPro Calculated Impulse of Trial 2\n",
+    "T2ipus = (0.022, 0.046, -0.046, -0.101, -.480, -0.872, -1.202, -1.478, -1.772, -2.010, -2.206, -2.292, -2.347, -2.316, -2.224, -2.047, -1.833, -1.545, -1.288, -0.927, -0.572, -0.242)#The data points collected from the Force v. Time graph over the interval of impact for Trial 2\n",
+    "T2ipu = nump.std(T2ipus) #Calculation of uncertainty of the Impulse of Trial 2\n",
+    "\n",
+    "T3ip = -0.4264 #The LoggerPro Calculated Impulse of Trial 1\n",
+    "T3ipus = (-0.049, -0.850, -1.273, -1.872, -2.411, -5.293, -1.964, -2.864, -1.683, -1.407, -0.997, -0.593, -0.214)#The data points collected from the Force v. Time graph over the interval of impact for Trial 3\n",
+    "T3ipu = nump.std(T3ipus) #Calculation of uncertainty of the Impulse of Trial 2\n",
+    "\n",
+    "V1i = 0.4249 # Initial Velocity of Trial 1\n",
+    "V1iu = 0.1296 # Uncertainty of the Initial Velocity of Trial 1\n",
+    "V1f = -0.2878 # Final Velocity of Trial 1\n",
+    "V1fu = 0.1282 # Uncertainty of the Final Velocity of Trial 1\n",
+    "\n",
+    "V2i = 0.6118 # Initial Velocity of Trial 2\n",
+    "V2iu = 0.02124 # Uncertainty of the Initial Velocity of Trial 2\n",
+    "V2f = -0.4688 # Final Velocity of Trial 2\n",
+    "V2fu = 0.01958 # Uncertainty of the Final Velocity of Trial 2\n",
+    "\n",
+    "V3i = 0.9322 # Initial Velocity of Trial 3\n",
+    "V3iu = 0.005857 # Uncertainty of the Initial Velocity of Trial 3\n",
+    "V3f = -0.5700 # Final Velocity of Trial 3\n",
+    "V3fu = 0.01551 # Uncertainty of the Final Velocity of Trial 3\n",
+    "\n",
+    "m = (498.8/1000) # Conversion of the mass of the cart used in all three trials from grams to kilograms\n",
+    "mu = 0.1 # The Uncertainty of the Measurment of Mass\n",
+    "\n",
+    "P1 = (V1f * m) - (V1i * m) # Calculation of the Change in Momentum of Trial 1\n",
+    "P1u1 = nump.sqrt((((V1fu)/(V1f))**2)+((((mu)/(m))**2))) # Calculation of Uncertainty of Vf *m of Trial 1\n",
+    "P1u2 = nump.sqrt((((V1iu)/(V1i))**2)+((((mu)/(m))**2))) # Calculation of Uncertainty of Vi *m of Trial 1\n",
+    "P1uc = nump.hypot(P1u1, P1u2) # Calculation of Uncertainty of the Change in Momentum of Trial 1\n",
+    "\n",
+    "P2 = (V2f * m) - (V2i * m) # Calculation of the Change in Momentum of Trial 2\n",
+    "P2u1 = nump.sqrt((((V2fu)/(V2f))**2)+((((mu)/(m))**2))) # Calculation of Uncertainty of Vf *m of Trial 2\n",
+    "P2u2 = nump.sqrt((((V2iu)/(V2i))**2)+((((mu)/(m))**2))) # Calculation of Uncertainty of Vi *m of Trial 2\n",
+    "P2uc = nump.hypot(P2u1, P2u2) # Calculation of Uncertainty of the Change in Momentum of Trial 2\n",
+    "\n",
+    "P3 = (V3f * m) - (V3i * m) # Calculation of the Change in Momentum of Trial 3\n",
+    "P3u1 = nump.sqrt((((V3fu)/(V3f))**2)+((((mu)/(m))**2))) # Calculation of Uncertainty of Vf *m of Trial 3\n",
+    "P3u2 = nump.sqrt((((V3iu)/(V3i))**2)+((((mu)/(m))**2))) # Calculation of Uncertainty of Vi *m of Trial 3\n",
+    "P3uc = nump.hypot(P3u1, P3u2) # Calculation of Uncertainty of the Change in Momentum of Trial 3\n",
+    "\n",
+    "print('---------------------------Trial 1-------------------------------------') # Visual Devider of Data\n",
+    "print('mass', m, 'kg', '+/-', mu, 'kg') # Prints the mass the cart used in the trial in kilograms as well as the uncertainty\n",
+    "print('Impulse', round(T1ip, 2), 'N/s', '+/-', round(T1ipu, 1), 'N/s') # Prints the Impulse of the trial in Newtons per Second as well as the Uncertainty\n",
+    "print('Change in Momentum', round(P1, 2), 'N/s', round(P1uc, 1), 'N/s') # Prints the Change in Momentum of the trial in Newtons per Second as well as the Uncertainty\n",
+    "print('---------------------------Trial 2-------------------------------------')\n",
+    "print('mass', m, 'kg', '+/-', mu, 'kg') # Prints the mass the cart used in the trial in kilograms as well as the uncertainty\n",
+    "print('Impulse', round(T2ip, 2), 'N/s', '+/-', round(T2ipu, 1), 'N/s') # Prints the Impulse of the trial in Newtons per Second as well as the Uncertainty\n",
+    "print('Change in Momentum', round(P2, 2), 'N/s', round(P2uc, 1), 'N/s') # Prints the Change in Momentum of the trial in Newtons per Second as well as the Uncertainty\n",
+    "print('---------------------------Trial 3-------------------------------------')\n",
+    "print('mass', m, 'kg', '+/-', mu, 'kg') # Prints the mass the cart used in the trial in kilograms as well as the uncertainty\n",
+    "print('Impulse', round(T3ip, 2), 'N/s', '+/-', round(T3ipu, 1), 'N/s') # Prints the Impulse of the trial in Newtons per Second as well as the Uncertainty\n",
+    "print('Change in Momentum', round(P3, 2), 'N/s', round(P3uc, 1), 'N/s') # Prints the Change in Momentum of the trial in Newtons per Second as well as the Uncertainty"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
